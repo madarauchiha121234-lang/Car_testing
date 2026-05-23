@@ -1,0 +1,778 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* =========================
+   ROOT VARIABLES
+========================= */
+:root{
+    --bg:#0a0a0a;
+    --glass:rgba(255,255,255,0.06);
+    --glass-2:rgba(255,255,255,0.12);
+    --text:#fff;
+    --red:#ff1e1e;
+    --cyan:#00ffff;
+    --shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+/* =========================
+   BACKGROUND STYLE
+========================= */
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top left,#00ffff18,transparent 45%),
+    radial-gradient(circle at bottom right,#ff000018,transparent 45%),
+    linear-gradient(135deg,#070707,#0f0f0f,#141414);
+}
+
+/* =========================
+   NAVBAR
+========================= */
+/* =========================
+   NAVBAR FIXED (STABLE VERSION)
+========================= */
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+
+    padding:0 40px;
+    height:75px;
+
+    background:rgba(10,10,10,0.6);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.banner{
+    width:100%;
+    min-height:100vh;
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:40px;
+
+    padding:50px 60px;
+
+    position:relative;
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(255,0,90,0.12),
+    transparent 30%),
+
+    radial-gradient(circle at bottom left,
+    rgba(0,140,255,0.12),
+    transparent 30%),
+
+    linear-gradient(
+    135deg,
+    #020202,
+    #0b0b0b,
+    #111
+    );
+}
+
+/* moving neon lines */
+.banner::before{
+    content:'';
+
+    position:absolute;
+    inset:0;
+
+    background:
+    repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 120px,
+    rgba(255,255,255,0.03) 121px
+    );
+
+    animation:moveLines 8s linear infinite;
+}
+
+@keyframes moveLines{
+
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(120px);
+    }
+
+}
+
+/* =========================
+   LINK
+========================= */
+
+.banner a{
+    text-decoration:none;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.banner .im{
+    position:relative;
+    width: 100%;
+    height:500px;
+
+    border-radius:30px;
+    overflow:hidden;
+
+    background:#101010;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+    0 20px 50px rgba(0,0,0,0.55);
+
+    transform-style:preserve-3d;
+
+    transition:
+    transform .6s ease,
+    box-shadow .6s ease;
+
+    animation:
+    cardReveal 1.2s ease forwards;
+
+    opacity:0;
+}
+
+/* stagger animation */
+.banner a:nth-child(1) .im{
+    animation-delay:.2s;
+}
+
+.banner a:nth-child(2) .im{
+    animation-delay:.4s;
+}
+
+.banner a:nth-child(3) .im{
+    animation-delay:.6s;
+}
+
+.banner a:nth-child(4) .im{
+    animation-delay:.8s;
+}
+
+.banner a:nth-child(5) .im{
+    animation-delay:1s;
+}
+
+/* image */
+.banner .im img{
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:1s ease;
+}
+
+/* glass overlay */
+.banner .im::after{
+    content:'';
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+    to top,
+    rgba(0,0,0,0.95),
+    rgba(0,0,0,0.15)
+    );
+}
+
+/* neon border animation */
+.banner .im::before{
+    content:'';
+
+    position:absolute;
+    inset:-2px;
+
+    border-radius:30px;
+
+    background:
+    linear-gradient(
+    45deg,
+    #ff004c,
+    #ff7300,
+    #00bfff,
+    #ff004c
+    );
+
+    background-size:400%;
+
+    z-index:-1;
+
+    filter:blur(12px);
+
+    opacity:0;
+
+    animation:neonBorder 6s linear infinite;
+    transition:.5s;
+}
+
+@keyframes neonBorder{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    100%{
+        background-position:400% 50%;
+    }
+
+}
+
+/* hover */
+.banner .im:hover{
+
+    transform:
+    perspective(10px)
+    rotateX(6deg)
+    rotateY(-6deg)
+    translateY(-18px)
+    scale(1.03);
+
+    box-shadow:
+    0 30px 70px rgba(0,191,255,0.2),
+    0 20px 50px rgba(255,0,76,0.25);
+}
+
+/* show neon */
+.banner .im:hover::before{
+    opacity:1;
+}
+
+/* zoom image */
+.banner .im:hover img{
+    transform:scale(1.18) rotate(2deg);
+}
+
+/* floating pulse */
+.banner .im:hover{
+    animation:floating 2s ease-in-out infinite;
+}
+
+@keyframes floating{
+
+    0%{
+        transform:
+        translateY(-12px);
+    }
+
+    50%{
+        transform:
+        translateY(-24px);
+    }
+
+    100%{
+        transform:
+        translateY(-12px);
+    }
+
+}
+
+/* reveal animation */
+@keyframes cardReveal{
+
+    from{
+        opacity:0;
+
+        transform:
+        translateY(0px)
+        rotateX(20deg)
+        scale(.85);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+        translateY(0)
+        rotateX(0)
+        scale(1);
+    }
+
+}
+
+
+
+/* LOGO */
+.pic{
+    display:flex;
+    align-items:center;
+}
+.pic img{
+    width:130px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.pic img:hover{
+    transform:scale(1.08);
+}
+
+/* MENU WRAPPER */
+.navbar ul{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    list-style:none;
+}
+
+/* LINKS */
+.navbar a{
+    position:relative;
+    display:inline-block;
+    padding:10px 14px;
+    color:#fff;
+    text-decoration:none;
+    font-size:15px;
+    transition:0.3s;
+}
+
+/* hover underline */
+.navbar a::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:4px;
+    width:0;
+    height:2px;
+    background:var(--red);
+    transform:translateX(-50%);
+    transition:0.3s;
+}
+
+.navbar a:hover::after{
+    width:70%;
+}
+
+/* hover lift fix */
+.navbar a:hover{
+    transform:translateY(-2px);
+}
+
+/* SEARCH */
+.search{
+    width:180px;
+    height:38px;
+
+    border:none;
+    outline:none;
+
+    border-radius:20px;
+    padding:0 14px;
+
+    background:var(--glass);
+    color:#fff;
+
+    transition:0.3s;
+}
+
+.search:focus{
+    width:240px;
+    background:var(--glass-2);
+}
+
+/* =========================
+   DROPDOWN FIX
+========================= */
+.navbar li{
+    position:relative;
+}
+
+.dropdown,
+.dropdowns{
+    position:absolute;
+    top:100%;
+    left:0;
+
+    min-width:180px;
+
+    background:rgba(15,15,15,0.95);
+    backdrop-filter:blur(20px);
+
+    border-radius:12px;
+
+    opacity:0;
+    visibility:hidden;
+    transform:translateY(10px);
+
+    transition:0.3s;
+
+    box-shadow:var(--shadow);
+    overflow:hidden;
+}
+
+/* show dropdown */
+.navbar li:hover .dropdown,
+.navbar li:hover .dropdowns{
+    opacity:1;
+    visibility:visible;
+    transform:translateY(0);
+}
+
+/* dropdown items */
+.dropdown a,
+.dropdowns a{
+    display:block;
+    padding:12px 15px;
+}
+
+.dropdown a:hover,
+.dropdowns a:hover{
+    background:rgba(255,255,255,0.08);
+    padding-left:22px;
+    color:var(--red);
+}
+
+
+/* =========================
+   CAR SECTION
+========================= */
+.contaner{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+    padding:40px 20px;
+}
+
+/* card */
+.item{
+    width:340px;
+    background:var(--glass);
+    border-radius:25px;
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:var(--shadow);
+
+    transition:0.4s;
+}
+
+.item:hover{
+    transform:translateY(-10px);
+}
+
+/* image */
+.item img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    transition:0.4s;
+}
+
+.item:hover img{
+    transform:scale(1.06);
+}
+
+/* text */
+.tex{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 18px;
+    font-size:13px;
+    color:rgba(255,255,255,0.7);
+}
+
+.tex2{
+    padding:8px 18px;
+    font-size:20px;
+    font-weight:700;
+}
+
+.tex3{
+    padding:10px 18px;
+    font-size:18px;
+    color:var(--cyan);
+}
+
+.tex4{
+    padding:0 18px 10px;
+    font-size:13px;
+    color:rgba(255,255,255,0.6);
+}
+
+/* badge */
+.box{
+    margin:10px 18px;
+    padding:6px 14px;
+    display:inline-block;
+    border-radius:50px;
+    background:linear-gradient(135deg,#ff0000,#8b0000);
+    font-size:11px;
+    font-weight:600;
+}
+/* =========================
+   MODERN VIEW BUTTON (FIXED)
+========================= */
+.button{
+    position: relative;
+    width: 20%;
+    margin: 15px auto 20px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50px;
+
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.35s ease;
+    overflow: hidden;
+
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* glowing gradient effect */
+.button::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0,255,255,0.4),
+        transparent
+    );
+
+    transition:0.6s;
+}
+
+/* hover animation */
+.button:hover::before{
+    left:100%;
+}
+
+.button:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,255,255,0.15);
+    background: linear-gradient(135deg, rgba(0,255,255,0.15), rgba(255,0,80,0.1));
+}
+
+/* active click effect */
+.button:active{
+    transform: scale(0.97);
+}
+
+/* button */
+.button-view{
+    width:90%;
+    margin:15px auto 20px;
+    height:44px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+
+    border:none;
+    border-radius:12px;
+
+    background:#1a1a1a;
+    color:#fff;
+
+    font-weight:600;
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:0.3s ease;
+}
+/* hover */
+.button-view:hover{
+    background:#2a2a2a;
+    transform:translateY(-3px);
+    box-shadow:0 12px 35px rgba(0,0,0,0.6);
+}
+
+/* click effect */
+.button-view:active{
+    transform:scale(0.98);
+}
+
+/* =========================
+   EXTRA RESPONSIVE FIX (UPGRADED)
+========================= */
+
+/* Large screens (4K / wide monitors) */
+@media (min-width: 1600px) {
+    .banner {
+        padding: 70px 120px;
+        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    }
+
+    .navbar {
+        padding: 0 80px;
+    }
+}
+
+/* Laptop small */
+@media (max-width: 1200px) {
+    .banner {
+        padding: 50px 40px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .item {
+        width: 300px;
+    }
+}
+
+/* iPad / Tablet (important fix) */
+@media (max-width: 992px) {
+    .navbar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 15px 20px;
+        gap: 10px;
+    }
+
+    .navbar ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 5px;
+    }
+
+    .search {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .banner {
+        grid-template-columns: 1fr 1fr;
+        padding: 40px 30px;
+        gap: 25px;
+    }
+
+    .button {
+        width: 40%;
+    }
+}
+
+/* Small tablets */
+@media (max-width: 768px) {
+    .banner {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+    }
+
+    .banner .im {
+        height: 240px;
+    }
+
+    .contaner {
+        padding: 30px 15px;
+    }
+
+    .item {
+        width: 100%;
+        max-width: 380px;
+    }
+
+    .button {
+        width: 60%;
+        font-size: 13px;
+    }
+}
+
+/* Phone (important) */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .navbar a {
+        width: 100%;
+        padding: 12px 10px;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .banner {
+        padding: 25px 15px;
+        gap: 18px;
+    }
+
+    .banner .im {
+        height: 200px;
+    }
+
+    .button {
+        width: 80%;
+        font-size: 12px;
+    }
+
+    .item img {
+        height: 200px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 400px) {
+    .banner {
+        padding: 20px 10px;
+    }
+
+    .button {
+        width: 90%;
+        font-size: 11px;
+    }
+
+    .tex2 {
+        font-size: 16px;
+    }
+
+    .tex3 {
+        font-size: 15px;
+    }
+}
